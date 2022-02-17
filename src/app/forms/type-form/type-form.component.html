@@ -1,0 +1,30 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form #typeForm="ngForm">
+      <button [disabled]="!changeType" (click)="change()" class="btn btn-info">Добавить тип</button>
+      <button [disabled]="changeType" (click)="change()" class="btn btn-info">Изменить тип</button>
+      <div class="form-group" *ngIf="changeType">
+        <label for="change">Выберите тип</label> <br>
+        <select (change)="chooseType($event)" id="change" required>
+          <option [value]="-1">Не выбрано</option>
+          <option *ngFor="let item of types;let i = index" [value]="i">{{item.type}}</option>
+        </select>
+        <div *ngIf="type.type===''" class="alert alert-danger">Укажите тип</div>
+      </div>
+      <div class="form-group">
+        <label for="name">Название типа</label>
+        <input type="text" [(ngModel)]="type.type"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Введите название типа"
+               required #typ="ngModel">
+        <div *ngIf="typ.invalid && typ.touched" class="alert alert-danger">Обязательное поле</div>
+      </div>
+      <button (click)="addType()" *ngIf="!changeType" [disabled]="!typeForm.form.valid"
+              class="btn btn-info">Добавить</button>
+      <button (click)="setType()" *ngIf="changeType" [disabled]="!typeForm.form.valid"
+              class="btn btn-info">Изменить</button>
+    </form>
+  </div>
+</div>

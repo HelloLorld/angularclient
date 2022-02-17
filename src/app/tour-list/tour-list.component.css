@@ -1,0 +1,26 @@
+mat-card {
+  width: 90%;
+}
+img {
+  max-width: 200px;
+  max-height: 400px;
+  margin: 0 auto;
+}
+
+.tour-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.example-section {
+  margin: 12px 0;
+}
+
+#parent {
+  position: relative;
+}
+
+#child {
+  position: absolute;
+  bottom:0;
+}

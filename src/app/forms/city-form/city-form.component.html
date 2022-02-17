@@ -1,0 +1,47 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form #typeForm="ngForm">
+      <button [disabled]="!changeCity" (click)="change()" class="btn btn-info">Добавить город</button>
+      <button [disabled]="changeCity" (click)="change()" class="btn btn-info">Изменить город</button>
+      <div class="form-group" *ngIf="changeCity">
+        <label for="change">Выберите город</label> <br>
+        <select (change)="chooseCity($event)" id="change" required>
+          <option [value]="-1">Не выбрано</option>
+          <option *ngFor="let item of cities;let i = index" [value]="i">{{item.name}}</option>
+        </select>
+        <div *ngIf="!checkCity()" class="alert alert-danger">Укажите город</div>
+      </div>
+      <div class="form-group">
+        <label for="name">Название города</label>
+        <input type="text" [(ngModel)]="city.name"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Введите название города"
+               required #typ="ngModel">
+        <div *ngIf="typ.invalid && typ.touched" class="alert alert-danger">Обязательное поле</div>
+      </div>
+      <div class="form-group" *ngIf="!changeCity">
+        <label for="country1">Страна</label> <br>
+        <select (change)="changeCountry($event)" id="country1" required>
+          <option [value]="-1">Не выбрано</option>
+          <option *ngFor="let item of countries;let i = index" [value]="i" >{{item.name}}</option>
+        </select>
+        <div *ngIf="!checkCity()" class="alert alert-danger">Укажите страну</div>
+      </div>
+      <div class="form-group" *ngIf="changeCity">
+        <div *ngIf="city.country != null">
+          <label for="country2">Страна</label> <br>
+          <select (change)="changeCountry($event)" id="country2" required>
+            <option *ngFor="let item of countries;let i = index" [value]="i" [selected]="item.id === city.country.id">{{item.name}}</option>
+          </select>
+          <div *ngIf="!checkCity()" class="alert alert-danger">Укажите страну</div>
+        </div>
+      </div>
+      <button (click)="addCity()" *ngIf="!changeCity" [disabled]="!typeForm.form.valid || !checkCity()"
+              class="btn btn-info">Добавить</button>
+      <button (click)="setChanges()" *ngIf="changeCity" [disabled]="!typeForm.form.valid || !checkCity()"
+              class="btn btn-info">Изменить</button>
+    </form>
+  </div>
+</div>

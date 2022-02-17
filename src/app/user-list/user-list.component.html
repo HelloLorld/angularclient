@@ -1,0 +1,22 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Email</th>
+        <th scope="col">Туры</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.firstName + " " + user.lastName }}</td>
+        <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+        <span *ngFor="let tour of user.tours; let i = index">{{tour.hotel.name}}<span *ngIf="i != user.tours.length-1">, </span></span>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

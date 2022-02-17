@@ -1,0 +1,30 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form #countryForm="ngForm">
+      <button [disabled]="!changeCountry" (click)="change()" class="btn btn-info">Добавить страну</button>
+      <button [disabled]="changeCountry" (click)="change()" class="btn btn-info">Изменить страну</button>
+      <div class="form-group" *ngIf="changeCountry">
+        <label for="change">Выберите страну</label> <br>
+        <select (change)="chooseCountry($event)" id="change" required>
+          <option [value]="-1">Не выбрано</option>
+          <option *ngFor="let item of countries;let i = index" [value]="i">{{item.name}}</option>
+        </select>
+        <div *ngIf="country.name===''" class="alert alert-danger">Укажите страну</div>
+      </div>
+      <div class="form-group">
+        <label for="name">Название страны</label>
+        <input type="text" [(ngModel)]="country.name"
+               class="form-control"
+               id="name"
+               name="country"
+               placeholder="Введите название страны"
+               required #ctnry="ngModel">
+        <div *ngIf="ctnry.invalid && ctnry.touched" class="alert alert-danger">Обязательное поле</div>
+      </div>
+      <button (click)="addCountry()" *ngIf="!changeCountry" [disabled]="!countryForm.form.valid"
+              class="btn btn-info">Добавить</button>
+      <button (click)="setCountry()" *ngIf="changeCountry" [disabled]="!countryForm.form.valid"
+              class="btn btn-info">Изменить</button>
+    </form>
+  </div>
+</div>

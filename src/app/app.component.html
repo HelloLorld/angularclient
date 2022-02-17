@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card bg-dark my-5">
+        <div class="card-body">
+          <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
+          <ul *ngIf="userLogged" class="text-center list-inline py-3">
+            <li class="list-inline-item">
+              <a routerLink="/account" class="btn btn-info">Личный кабинет</a>
+            </li>
+            <li class="list-inline-item">
+              <a routerLink="/tours" class="btn btn-info">Список туров</a>
+            </li>
+            <li class="list-inline-item">
+              <a routerLink="/login" (click)="exit()" class="btn btn-info">Выйти</a>
+            </li>
+          </ul>
+          <ul *ngIf = "adminLogged" class="text-center list-inline py-3">
+            <li class="list-inline-item">
+              <a routerLink="/addtour" class="btn btn-info">Добавить тур</a>
+            </li>
+            <li class="list-inline-item">
+              <a routerLink="/addcity" class="btn btn-info">Добавить город</a>
+            </li>
+            <li class="list-inline-item">
+              <a routerLink="/addcountry" class="btn btn-info">Добавить страну</a>
+            </li>
+            <li class="list-inline-item">
+              <a routerLink="/addtype" class="btn btn-info">Добавить тип</a>
+            </li>
+            <li class="list-inline-item">
+              <a routerLink="/addhotel" class="btn btn-info">Добавить отель</a>
+            </li>
+            <li class="list-inline-item">
+              <a routerLink="/users" class="btn btn-info">Пользователи</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

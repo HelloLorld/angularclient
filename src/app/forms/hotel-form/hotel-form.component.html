@@ -1,0 +1,47 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form #hotelForm="ngForm">
+      <button [disabled]="!changeHotel" (click)="change()" class="btn btn-info">Добавить отель</button>
+      <button [disabled]="changeHotel" (click)="change()" class="btn btn-info">Изменить отель</button>
+      <div class="form-group" *ngIf="changeHotel">
+        <label for="change">Выберите отель</label> <br>
+        <select (change)="chooseHotel($event)" id="change" required>
+          <option [value]="-1">Не выбрано</option>
+          <option *ngFor="let item of hotels;let i = index" [value]="i">{{item.name}}</option>
+        </select>
+        <div *ngIf="hotel.name===''" class="alert alert-danger">Укажите город</div>
+      </div>
+      <div class="form-group">
+        <label for="name">Название отеля</label>
+        <input type="text" [(ngModel)]="hotel.name"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Введите название отеля"
+               required #typ="ngModel">
+        <div *ngIf="typ.invalid && typ.touched" class="alert alert-danger">Обязательное поле</div>
+      </div>
+      <div class="form-group" *ngIf="!changeHotel">
+        <label for="city">Город</label> <br>
+        <select (change)="changeCity($event)" id="city" required>
+          <option [value]="-1">Не выбрано</option>
+          <option *ngFor="let item of cities;let i = index" [value]="i">{{item.name + " (" + item.country.name + ")"}}</option>
+        </select>
+        <div *ngIf="!checkCity()" class="alert alert-danger">Укажите страну</div>
+      </div>
+      <div class="form-group" *ngIf="changeHotel">
+        <div *ngIf="hotel.city != null">
+          <label for="country2">Страна</label> <br>
+          <select (change)="changeCity($event)" id="country2" required>
+            <option *ngFor="let item of cities;let i = index" [value]="i" [selected]="item.id === hotel.city.id">{{item.name}}</option>
+          </select>
+          <div *ngIf="!checkCity()" class="alert alert-danger">Укажите страну</div>
+        </div>
+      </div>
+      <button (click)="addHotel()" *ngIf="!changeHotel" [disabled]="!hotelForm.form.valid || checkCity()"
+              class="btn btn-info">Добавить</button>
+      <button (click)="setHotel()" *ngIf="changeHotel" [disabled]="!hotelForm.form.valid || checkCity()"
+              class="btn btn-info">Изменить</button>
+    </form>
+  </div>
+</div>

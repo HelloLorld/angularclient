@@ -1,0 +1,50 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" novalidate #userForm="ngForm">
+      <div ngModelGroup="fullName" #fullName = "ngModelGroup">
+      <div class="form-group">
+        <label for="firstName">Имя</label>
+        <input type="text" [(ngModel)]="user.firstName"
+               class="form-control"
+               id="firstName"
+               name="name"
+               placeholder="Введите ваше имя"
+               required #firstName="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Фамилия</label>
+        <input type="text" [(ngModel)]="user.lastName"
+               class="form-control"
+               id="lastName"
+               name="lastName"
+               placeholder="Введите вашу фамилию"
+               required #lastName="ngModel">
+      </div>
+      </div>
+      <div *ngIf="fullName.invalid && fullName.touched" class="alert alert-danger">Нужно заполнить оба поля</div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" [(ngModel)]="user.email"
+               class="form-control"
+               id="email"
+               name="email"
+               placeholder="Введите ваш email адрес"
+               required #email="ngModel">
+        <div *ngIf="email.invalid && email.touched" class="alert alert-danger">Email - обязательное поле</div>
+      </div>
+      <div class="form-group">
+        <label for="password">Пароль</label>
+        <input type="password" [(ngModel)]="user.password"
+               class="form-control"
+               id="password"
+               name="password"
+               placeholder="Введите ваш пароль"
+               required #password="ngModel">
+        <div *ngIf="password.invalid && password.touched" class="alert alert-danger">Пароль - обязательное поле</div>
+      </div>
+      <button type="submit" [disabled]="!userForm.form.valid"
+              class="btn btn-info">Регистрация</button>
+      <a routerLink="/login">Войти</a>
+    </form>
+  </div>
+</div>

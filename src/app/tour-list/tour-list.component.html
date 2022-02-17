@@ -1,0 +1,51 @@
+<div class="card-body">
+  <mat-grid-list cols="3" rowHeight="400px" class="filter-list">
+    <mat-grid-tile class="filter-tile" [rowspan]="tours.length/2">
+      <div id="parent">
+        <div id="child">
+          <div>
+            <section class="example-section" [formGroup]="types">
+              <h4>Тип тура:</h4>
+              <p><mat-checkbox formControlName="hit" (change)="checkbox = !checkbox">Хит</mat-checkbox></p>
+              <p><mat-checkbox formControlName="casual" (change)="checkbox = !checkbox">Обычный</mat-checkbox></p>
+              <p><mat-checkbox formControlName="hot" (change)="checkbox = !checkbox">Горящий</mat-checkbox></p>
+              <p><mat-checkbox formControlName="sale" (change)="checkbox = !checkbox">Скидка</mat-checkbox></p>
+            </section>
+          </div>
+          <br>
+          <div>
+            <section class="example-section" [formGroup]="countries">
+              <h4>Тип тура:</h4>
+              <p><mat-checkbox formControlName="russia" (change)="checkbox = !checkbox">Россия</mat-checkbox></p>
+              <p><mat-checkbox formControlName="china" (change)="checkbox = !checkbox">Китай</mat-checkbox></p>
+              <p><mat-checkbox formControlName="ukraine" (change)="checkbox = !checkbox">Украина</mat-checkbox></p>
+              <p><mat-checkbox formControlName="german" (change)="checkbox = !checkbox">Германия</mat-checkbox></p>
+              <p><mat-checkbox formControlName="usa" (change)="checkbox = !checkbox">США</mat-checkbox></p>
+              <p><mat-checkbox formControlName="greatBritain" (change)="checkbox = !checkbox">Великобритания</mat-checkbox></p>
+              <p><mat-checkbox formControlName="kazakhstan" (change)="checkbox = !checkbox">Казахстан</mat-checkbox></p>
+            </section>
+          </div>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let tour of tours | types: types: checkbox | countries: countries: checkbox; let i = index" class="tour-tile">
+      <mat-card>
+        <mat-card-title>
+          {{tour.description}}
+        </mat-card-title>
+        <img src="https://russiadiscovery.ru/upload/files/Tur-na-Kamchatku%20(2)_1571218207.jpg" alt="Тур">
+        <mat-card-content>
+          Отель: {{tour.hotel.name}} <br>
+          Город: {{tour.hotel.city.name}} <br>
+          Страна: {{tour.hotel.city.country.name}} <br>
+          Тип: <b>{{tour.type.type}}</b> <br>
+        </mat-card-content>
+        <mat-card-actions *ngIf="user!=null">
+          <button mat-icon-button [color]="this.clicked.has(i) ? 'warn' : 'primary'" (click)="addTour(i)">
+            <mat-icon>favorite</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

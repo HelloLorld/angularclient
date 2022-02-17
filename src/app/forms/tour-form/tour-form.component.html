@@ -1,0 +1,67 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form #tourForm="ngForm">
+      <button [disabled]="!changeTour" (click)="change()" class="btn btn-info">Добавить тур</button>
+      <button [disabled]="changeTour" (click)="change()" class="btn btn-info">Изменить тур</button>
+      <div class="form-group" *ngIf="changeTour">
+        <label for="change">Выберите тур</label> <br>
+        <select (change)="chooseTour($event)" id="change" required>
+          <option [value]="-1">Не выбрано</option>
+          <option *ngFor="let item of tours;let i = index" [value]="i">{{item.description}}</option>
+        </select>
+        <div *ngIf="tour.id==null" class="alert alert-danger">Укажите тур</div>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Название</label>
+        <input type="text" [(ngModel)]="tour.description"
+               class="form-control"
+               id="lastName"
+               name="lastName"
+               placeholder="Введите название тура"
+               required #description="ngModel">
+        <div *ngIf="description.invalid && description.touched" class="alert alert-danger">Название - обязательное
+          поле
+        </div>
+      </div>
+      <div class="form-group" *ngIf="!changeTour">
+        <label for="hotel1">Отель</label> <br>
+        <select (change)="changeHotel($event)" id="hotel1" required>
+          <option [value]="-1">Не выбрано</option>
+          <option *ngFor="let item of hotels; let i = index;"
+                  [value]="i">{{item.name + " (" + item.city.name + ")"}}</option>
+        </select>
+        <div *ngIf="!checkHotel()" class="alert alert-danger">Укажите отель</div>
+      </div>
+      <div class="form-group" *ngIf="changeTour">
+        <div *ngIf="tour.hotel != null">
+          <label for="hotel2">Отель</label> <br>
+          <select (change)="changeHotel($event)" id="hotel2" required>
+            <option *ngFor="let item of hotels;let i = index" [value]="i" [selected]="item.id === tour.hotel.id">{{item.name}}</option>
+          </select>
+          <div *ngIf="!checkHotel()" class="alert alert-danger">Укажите отель</div>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="!changeTour">
+        <label for="type1">Тип</label> <br>
+        <select (change)="changeType($event)" id="type1" required>
+          <option [value]="-1">Не выбрано</option>
+          <option *ngFor="let item of types;let i = index" [value]="i">{{item.type}}</option>
+        </select>
+        <div *ngIf="!checkType()" class="alert alert-danger">Укажите тип</div>
+      </div>
+      <div class="form-group" *ngIf="changeTour">
+        <div *ngIf="tour.type != null">
+          <label for="type2">Тип</label> <br>
+          <select (change)="changeHotel($event)" id="type2" required>
+            <option *ngFor="let item of types;let i = index" [value]="i" [selected]="item.id === tour.type.id">{{item.type}}</option>
+          </select>
+          <div *ngIf="!checkType()" class="alert alert-danger">Укажите отель</div>
+        </div>
+      </div>
+      <button (click)="addTour()" *ngIf="!changeTour" [disabled]="!tourForm.form.valid || !checkTour()"
+              class="btn btn-info">Добавить</button>
+      <button (click)="setTour()" *ngIf="changeTour" [disabled]="!tourForm.form.valid || !checkTour()"
+              class="btn btn-info">Изменить</button>
+    </form>
+  </div>
+</div>
