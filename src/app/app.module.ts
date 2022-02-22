@@ -25,9 +25,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { TypesPipe } from './filters/types.pipe';
-import {MatGridListModule} from "@angular/material/grid-list";
-import {MatCardModule} from "@angular/material/card";
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
 import { CountriesPipe } from './filters/countries.pipe';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { CountriesPipe } from './filters/countries.pipe';
         MatIconModule,
         MatCheckboxModule,
         MatGridListModule,
-        MatCardModule
+        MatCardModule,
+        MatMenuModule
     ],
   providers: [
     UserService,

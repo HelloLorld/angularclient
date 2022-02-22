@@ -1,29 +1,32 @@
 <div class="card-body">
   <mat-grid-list cols="3" rowHeight="400px" class="filter-list">
     <mat-grid-tile class="filter-tile" [rowspan]="tours.length/2">
-      <div id="parent">
-        <div id="child">
-          <div>
-            <section class="example-section" [formGroup]="types">
-              <h4>Тип тура:</h4>
-              <p><mat-checkbox formControlName="hit" (change)="checkbox = !checkbox">Хит</mat-checkbox></p>
-              <p><mat-checkbox formControlName="casual" (change)="checkbox = !checkbox">Обычный</mat-checkbox></p>
-              <p><mat-checkbox formControlName="hot" (change)="checkbox = !checkbox">Горящий</mat-checkbox></p>
-              <p><mat-checkbox formControlName="sale" (change)="checkbox = !checkbox">Скидка</mat-checkbox></p>
-            </section>
-          </div>
-          <br>
-          <div>
-            <section class="example-section" [formGroup]="countries">
-              <h4>Тип тура:</h4>
-              <p><mat-checkbox formControlName="russia" (change)="checkbox = !checkbox">Россия</mat-checkbox></p>
-              <p><mat-checkbox formControlName="china" (change)="checkbox = !checkbox">Китай</mat-checkbox></p>
-              <p><mat-checkbox formControlName="ukraine" (change)="checkbox = !checkbox">Украина</mat-checkbox></p>
-              <p><mat-checkbox formControlName="german" (change)="checkbox = !checkbox">Германия</mat-checkbox></p>
-              <p><mat-checkbox formControlName="usa" (change)="checkbox = !checkbox">США</mat-checkbox></p>
-              <p><mat-checkbox formControlName="greatBritain" (change)="checkbox = !checkbox">Великобритания</mat-checkbox></p>
-              <p><mat-checkbox formControlName="kazakhstan" (change)="checkbox = !checkbox">Казахстан</mat-checkbox></p>
-            </section>
+      <div id="containerForFilters">
+        <div id="parent">
+          <div id="child">
+            <div>
+              <section class="example-section" [formGroup]="types">
+                <h4>Тип тура:</h4>
+                <p><mat-checkbox formControlName="hit" (change)="checkbox = !checkbox">Хит</mat-checkbox></p>
+                <p><mat-checkbox formControlName="casual" (change)="checkbox = !checkbox">Обычный</mat-checkbox></p>
+                <p><mat-checkbox formControlName="hot" (change)="checkbox = !checkbox">Горящий</mat-checkbox></p>
+                <p><mat-checkbox formControlName="sale" (change)="checkbox = !checkbox">Скидка</mat-checkbox></p>
+              </section>
+            </div>
+            <br>
+            <div>
+              <section class="example-section" [formGroup]="countries">
+                <h4>Тип тура:</h4>
+                <p><mat-checkbox formControlName="russia" (change)="checkbox = !checkbox">Россия</mat-checkbox></p>
+                <p><mat-checkbox formControlName="china" (change)="checkbox = !checkbox">Китай</mat-checkbox></p>
+                <p><mat-checkbox formControlName="ukraine" (change)="checkbox = !checkbox">Украина</mat-checkbox></p>
+                <p><mat-checkbox formControlName="german" (change)="checkbox = !checkbox">Германия</mat-checkbox></p>
+                <p><mat-checkbox formControlName="usa" (change)="checkbox = !checkbox">США</mat-checkbox></p>
+                <p><mat-checkbox formControlName="greatBritain" (change)="checkbox = !checkbox">Великобритания</mat-checkbox></p>
+                <p><mat-checkbox formControlName="kazakhstan" (change)="checkbox = !checkbox">Казахстан</mat-checkbox></p>
+              </section>
+            </div>
+            <div><button mat-raised-button [disabled]="!checkFilters()" (click)="clearFilters()"><mat-icon>delete</mat-icon> Очистить фильтры</button></div>
           </div>
         </div>
       </div>

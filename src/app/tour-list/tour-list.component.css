@@ -18,9 +18,15 @@ img {
 
 #parent {
   position: relative;
+  margin: 0 auto;
 }
 
 #child {
   position: absolute;
   bottom:0;
+}
+
+#containerForFilters {
+  position: absolute;
+  left: 0;
 }

@@ -47,6 +47,7 @@ export class TourListComponent implements OnInit {
     });
   }
 
+
   ngOnInit(): void {
     this.tourService.findAll().subscribe(
       data => {
@@ -62,6 +63,32 @@ export class TourListComponent implements OnInit {
     );
   }
 
+  checkFilters(): boolean {
+    const flagOfCountries = this.countries.get('russia').value || this.countries.get('china').value ||
+      this.countries.get('ukraine').value || this.countries.get('german').value || this.countries.get('usa').value ||
+      this.countries.get('greatBritain').value || this.countries.get('kazakhstan').value;
+    const flagOfTypes = this.types.get('hot').value || this.types.get('sale').value || this.types.get('casual').value ||
+      this.types.get('hit').value;
+    return flagOfTypes || flagOfCountries;
+  }
+
+   clearFilters(): void {
+     this.types = this.fb.group({
+       hot: false,
+       sale: false,
+       casual: false,
+       hit: false
+     });
+     this.countries = this.fb.group({
+       russia: false,
+       china: false,
+       ukraine: false,
+       german: false,
+       usa: false,
+       greatBritain: false,
+       kazakhstan: false
+     });
+   }
 
   addTour(index: number): void {
     this.addingTour.emit(this.tours[index]);
@@ -69,10 +96,11 @@ export class TourListComponent implements OnInit {
   }
 
   get_diff(a1: Tour[], a2: Tour[]): Tour[] {
-    let diff: Tour[] = [];
-    let set: Set<number> = new Set<number>();
-    for (let i = 0; i < a1.length; i++)
+    let diff: Tour[];
+    const set: Set<number> = new Set<number>();
+    for (let i = 0; i < a1.length; i++) {
       set.add(a1[i].id);
+    }
     diff = a2.filter(tour => {
       return !set.has(tour.id);
     });
