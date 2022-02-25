@@ -15,8 +15,8 @@ export class UserListComponent implements OnInit {
   constructor(private userService: UserService,
               private route: ActivatedRoute,
               private router: Router) {
-    if (Number(CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8)
-      .slice(0, 1)) !== 1) {
+    const decrString = CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8);
+    if (Number(decrString.slice(0, decrString.lastIndexOf('&'))) !== 1) {
       router.navigate(['/login']).then(r => location.reload());
     }
   }

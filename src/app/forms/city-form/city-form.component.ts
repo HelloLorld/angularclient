@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CityService} from '../../service/city.service';
 import {Country} from '../../model/country.model';
 import {CountryService} from '../../service/country.service';
-import CryptoES from "crypto-es";
+import CryptoES from 'crypto-es';
 
 @Component({
   selector: 'app-city-form',
@@ -23,8 +23,8 @@ export class CityFormComponent {
     private countryService: CountryService,
     private cityService: CityService
   ) {
-    if (Number(CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8)
-      .slice(0, 1)) !== 1) {
+    const decrString = CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8);
+    if (Number(decrString.slice(0, decrString.lastIndexOf('&'))) !== 1) {
       router.navigate(['/login']).then(r => location.reload());
     }
     this.changeCity = false;
@@ -81,8 +81,7 @@ export class CityFormComponent {
   }
 
   checkCity(): boolean {
-    if (this.city.country == null) { return false; }
-    else { return true; }
+    return this.city.country != null;
   }
 
 }

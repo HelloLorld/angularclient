@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import CryptoES from 'crypto-es';
 
@@ -19,11 +19,8 @@ export class AppComponent {
     if (localStorage.getItem('userId') === null ) { this.userLogged = false; }
     else {
       this.userLogged = true;
-      if (Number(CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8)
-        .slice(0, 1)) !== 1) {
-        this.adminLogged = false;
-      }
-      else { this.adminLogged = true; }
+      const decrString = CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8);
+      this.adminLogged = Number(decrString.slice(0, decrString.lastIndexOf('&'))) === 1;
     }
   }
 

@@ -10,6 +10,7 @@ import {UserService} from '../../service/user.service';
 })
 export class UserFormComponent {
   user: User;
+  trouble = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +25,14 @@ export class UserFormComponent {
 
   onSubmit(): void {
     this.userService.save(this.user).subscribe(result => {
+      if (result != null) {
       this.router.navigate(['/login']).then(r => location.reload());
+      }
+      else {
+        this.trouble = true;
+        setTimeout(() => {
+        this.trouble = false;
+      }, 3000); }
     });
   }
 

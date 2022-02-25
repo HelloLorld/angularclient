@@ -29,8 +29,9 @@ export class PersonalAccountComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8));
-    this.userService.getUserById(Number(CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8)
-      .slice(0, 1))).subscribe(data => this.user = data);
+    const decrString = CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8);
+    this.userService.getUserById(Number(decrString
+      .slice(0, decrString.lastIndexOf('&')))).subscribe(data => this.user = data);
     setTimeout(() => {
       if (this.user == null) {
         localStorage.clear();

@@ -23,8 +23,8 @@ export class HotelFormComponent{
     private hotelService: HotelService,
     private cityService: CityService
   ) {
-    if (Number(CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8)
-      .slice(0, 1)) !== 1) {
+    const decrString = CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8);
+    if (Number(decrString.slice(0, decrString.lastIndexOf('&'))) !== 1) {
       router.navigate(['/login']).then(r => location.reload());
     }
     this.hotel = new Hotel();
@@ -67,8 +67,7 @@ export class HotelFormComponent{
   }
 
   checkCity(): boolean {
-    if (this.hotel.city == null) { return false; }
-    else { return true; }
+    return this.hotel.city != null;
   }
 
 

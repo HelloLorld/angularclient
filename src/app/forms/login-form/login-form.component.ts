@@ -35,7 +35,7 @@ export class LoginFormComponent {
       // @ts-ignore
       this.getLogged.set('password', data.password);
       if (this.getLogged.get('email') && this.getLogged.get('password')) { // @ts-ignore
-        localStorage.setItem('userId', CryptoES.AES.encrypt(data.userId.toString() + 'somebigstring', 'idForUser').toString());
+        localStorage.setItem('userId', CryptoES.AES.encrypt(data.userId.toString() + '&somebigstring', 'idForUser').toString());
         this.router.navigate(['/account']).then(r => location.reload());
       }
       console.log(this.getLogged.size);

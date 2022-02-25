@@ -4,11 +4,11 @@
       <mat-card-title-group>
         <mat-card-title>{{user.firstName + " " + user.lastName }}</mat-card-title>
         <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
-        <img mat-card-sm-image src="https://cdn-icons-png.flaticon.com/512/21/21104.png" >
+        <img mat-card-sm-image src="https://cdn-icons-png.flaticon.com/512/21/21104.png"  alt="avatar">
       </mat-card-title-group>
       <mat-card-content>
-        <h2 *ngIf="user.tours.length != 0">Туры: </h2>
-        <p *ngFor="let tour of user.tours">{{tour.hotel.name}}</p>
+        <h2 *ngIf="user.tours.length != 0">Ваши туры: </h2>
+        <p *ngFor="let tour of user.tours">{{tour.description+ ": " + tour.hotel.name + " " + "(" +tour.type.type+")"}}</p>
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="warn" [disabled]="unchanged" (click)="saveUser()">Сохранить</button>
@@ -16,5 +16,6 @@
       <span *ngIf="changedUser">Изменения сохранены</span>
     </mat-card>
   </div>
+  <h2 class="card-title text-center">Доступные туры</h2>
   <app-tour-list [user]="user" (addingTour)="handleTour($event)"></app-tour-list>
 </div>

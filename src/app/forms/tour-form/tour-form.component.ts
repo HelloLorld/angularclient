@@ -27,8 +27,8 @@ export class TourFormComponent {
     private typeService: TypeService,
     private hotelService: HotelService
   ) {
-    if (Number(CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8)
-      .slice(0, 1)) !== 1) {
+    const decrString = CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8);
+    if (Number(decrString.slice(0, decrString.lastIndexOf('&'))) !== 1) {
       router.navigate(['/login']).then(r => location.reload());
     }
     this.tour = new Tour();
@@ -90,17 +90,14 @@ export class TourFormComponent {
   }
 
   checkType(): boolean {
-    if (this.tour.type == null) { return false; }
-    else { return true; }
+    return this.tour.type != null;
   }
 
   checkHotel(): boolean {
-    if (this.tour.hotel == null) { return false; }
-    else { return true; }
+    return this.tour.hotel != null;
   }
 
   checkTour(): boolean {
-    if (!this.checkHotel() || !this.checkType()) { return false; }
-    else { return true; }
+    return !(!this.checkHotel() || !this.checkType());
   }
 }

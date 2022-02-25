@@ -45,6 +45,7 @@
       <button type="submit" [disabled]="!userForm.form.valid"
               class="btn btn-info">Регистрация</button>
       <a routerLink="/login">Войти</a>
+      <span *ngIf="trouble" class="alert alert-danger">Не удалось зарегистрироваться. Возможно, Email уже используется</span>
     </form>
   </div>
 </div>
