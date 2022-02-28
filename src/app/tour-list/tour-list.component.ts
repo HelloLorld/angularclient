@@ -30,6 +30,7 @@ export class TourListComponent implements OnInit {
     if (localStorage.getItem('userId') === null) {
       router.navigate(['/login']).then(r => location.reload());
     }
+    this.tours = [];
     this.types = fb.group({
       hot: false,
       sale: false,
