@@ -13,7 +13,8 @@
       <mat-card-actions>
         <button mat-raised-button color="warn" [disabled]="unchanged" (click)="saveUser()">Сохранить</button>
       </mat-card-actions>
-      <span *ngIf="changedUser">Изменения сохранены</span>
+      <span *ngIf="!changedUser && buttonClicked" class="alert alert-danger">Изменения не сохранены, т.к пользователь остался прежним</span>
+      <span *ngIf="changedUser && buttonClicked" class="alert alert-success">Изменения сохранены</span>
     </mat-card>
   </div>
   <h2 class="card-title text-center">Доступные туры</h2>

@@ -93,7 +93,9 @@ export class TourListComponent implements OnInit {
 
   addTour(index: number): void {
     this.addingTour.emit(this.tours[index]);
-    this.clicked.add(index);
+    if (this.clicked.has(index)) { this.clicked.delete(index); }
+    else { this.clicked.add(index); }
+
   }
 
   get_diff(a1: Tour[], a2: Tour[]): Tour[] {

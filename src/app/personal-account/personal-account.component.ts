@@ -15,6 +15,7 @@ export class PersonalAccountComponent implements OnInit {
   user: User;
   changedUser = false;
   unchanged = true;
+  buttonClicked = false;
 
   constructor(private userService: UserService,
               private route: ActivatedRoute,
@@ -44,15 +45,32 @@ export class PersonalAccountComponent implements OnInit {
 
   handleTour(tour: Tour): void {
     if (!this.user.tours.includes(tour)) { this.user.tours.push(tour); }
+    else {
+      let remove: number;
+      for (let i = 0; i < this.user.tours.length; i++){
+        if (this.user.tours[i] === tour) { remove = i; break; }
+      }
+      this.user.tours.splice(remove, 1);
+    }
     this.unchanged = false;
   }
 
   saveUser(): void {
-    this.userService.change(this.user).subscribe(data => {
-      if (data != null) { this.changedUser = true; }
-      setTimeout(() => {
-        location.reload();
-      }, 1500);
+    this.userService.change(this.user).subscribe(result => {
+      this.buttonClicked = true;
+      if (result != null) {
+        this.changedUser = true;
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
+      }
+      else {
+        this.changedUser = false;
+        setTimeout(() => {
+          this.buttonClicked = false;
+          this.unchanged = true;
+        }, 1000);
+      }
     });
   }
 }
