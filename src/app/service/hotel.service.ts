@@ -17,11 +17,11 @@ export class HotelService {
     return this.http.get<Hotel[]>(this.hotelUrl);
   }
 
-  public save(hotel: Hotel) {
+  public save(hotel: Hotel): Observable<Hotel> {
     return this.http.post<Hotel>(this.hotelUrl, hotel);
   }
 
-  public change(hotel: Hotel) {
-    return this.http.put<Hotel>(this.hotelUrl + '/' + hotel.id, hotel);
+  public change(hotel: Hotel): Observable<Hotel> {
+    return this.http.patch<Hotel>(this.hotelUrl + '/' + hotel.id, hotel);
   }
 }

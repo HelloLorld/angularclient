@@ -29,12 +29,11 @@ export class UserService {
     return this.http.post<object>(this.url.slice(0, 21) + '/login', jsonObject);
   }
 
-  public save(user: User) {
+  public save(user: User): Observable<User> {
     return this.http.post<User>(this.url, user);
   }
 
-  public change(user: User) {
-    console.log(this.url + '/' + user.id);
-    return this.http.put<User>(this.url + '/' + user.id, user);
+  public change(user: User): Observable<User> {
+    return this.http.patch<User>(this.url + '/' + user.id, user);
   }
 }

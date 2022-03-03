@@ -17,11 +17,11 @@ export class TourService {
     return this.http.get<Tour[]>(this.tourUrl);
   }
 
-  public save(tour: Tour) {
+  public save(tour: Tour): Observable<Tour> {
     return this.http.post<Tour>(this.tourUrl, tour);
   }
 
-  public change(tour: Tour) {
-    return this.http.put<Tour>(this.tourUrl + '/' + tour.id, tour);
+  public change(tour: Tour): Observable<Tour> {
+    return this.http.patch<Tour>(this.tourUrl + '/' + tour.id, tour);
   }
 }

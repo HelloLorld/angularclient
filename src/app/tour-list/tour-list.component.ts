@@ -107,4 +107,9 @@ export class TourListComponent implements OnInit {
     });
     return diff;
   }
+
+  getLengthOfFilters(): number {
+    if (this.tours.length < 6) { return 3; }
+    return this.tours.length / 2;
+  }
 }

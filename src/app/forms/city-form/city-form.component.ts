@@ -16,6 +16,8 @@ export class CityFormComponent {
   cities: City[];
   countries: Country[];
   changeCity: boolean;
+  haveChange: boolean;
+  buttonClicked = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,11 +50,27 @@ export class CityFormComponent {
   }
 
   addCity(): void {
-    this.cityService.save(this.city).subscribe(result => location.reload());
+    this.cityService.save(this.city).subscribe(result => {
+      location.reload();
+    });
   }
 
   setChanges(): void {
-    this.cityService.change(this.city).subscribe( result => location.reload());
+    this.cityService.change(this.city).subscribe( result => {
+      this.buttonClicked = true;
+      if (result != null) {
+        this.haveChange = true;
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
+      }
+      else {
+        this.haveChange = false;
+        setTimeout(() => {
+          this.buttonClicked = false;
+        }, 2000);
+      }
+    });
   }
 
   change(): void {
@@ -62,7 +80,6 @@ export class CityFormComponent {
 
   changeCountry(e: any): void {
     const index = e.target.value;
-    console.log(index);
     if (Number(index) !== -1) {
       this.city.country = this.countries[index];
     }
@@ -71,7 +88,6 @@ export class CityFormComponent {
 
   chooseCity(e: any): void {
     const index = e.target.value;
-    console.log(index);
     if (Number(index) !== -1) {
       this.city = this.cities[index];
     }

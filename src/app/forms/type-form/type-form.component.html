@@ -25,6 +25,8 @@
               class="btn btn-info">Добавить</button>
       <button (click)="setType()" *ngIf="changeType" [disabled]="!typeForm.form.valid"
               class="btn btn-info">Изменить</button>
+      <span *ngIf="!haveChange && buttonClicked" class="alert alert-danger">Изменения не сохранены, т.к тип остался прежним</span>
+      <span *ngIf="haveChange && buttonClicked" class="alert alert-success">Изменения сохранены</span>
     </form>
   </div>
 </div>

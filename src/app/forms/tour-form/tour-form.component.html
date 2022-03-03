@@ -52,7 +52,7 @@
       <div class="form-group" *ngIf="changeTour">
         <div *ngIf="tour.type != null">
           <label for="type2">Тип</label> <br>
-          <select (change)="changeHotel($event)" id="type2" required>
+          <select (change)="changeType($event)" id="type2" required>
             <option *ngFor="let item of types;let i = index" [value]="i" [selected]="item.id === tour.type.id">{{item.type}}</option>
           </select>
           <div *ngIf="!checkType()" class="alert alert-danger">Укажите отель</div>
@@ -62,6 +62,8 @@
               class="btn btn-info">Добавить</button>
       <button (click)="setTour()" *ngIf="changeTour" [disabled]="!tourForm.form.valid || !checkTour()"
               class="btn btn-info">Изменить</button>
+      <span *ngIf="!haveChange && buttonClicked" class="alert alert-danger">Изменения не сохранены, т.к тур остался прежним</span>
+      <span *ngIf="haveChange && buttonClicked" class="alert alert-success">Изменения сохранены</span>
     </form>
   </div>
 </div>

@@ -11,6 +11,7 @@ import {UserService} from '../../service/user.service';
 export class UserFormComponent {
   user: User;
   trouble = false;
+  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
 
   constructor(
     private route: ActivatedRoute,

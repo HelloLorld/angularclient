@@ -19,6 +19,8 @@ export class TourFormComponent {
   types: Type[];
   hotels: Hotel[];
   changeTour: boolean;
+  haveChange: boolean;
+  buttonClicked = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,19 +44,31 @@ export class TourFormComponent {
 
   addTour(): void {
     this.tourService.save(this.tour).subscribe(result => {
-      this.goToTourList();
+      this.buttonClicked = true;
+      location.reload();
     });
   }
 
   setTour(): void {
     this.tourService.change(this.tour).subscribe(result => {
-      this.goToTourList();
+      this.buttonClicked = true;
+      if (result != null) {
+        this.haveChange = true;
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
+      }
+      else {
+        this.haveChange = false;
+        setTimeout(() => {
+          this.buttonClicked = false;
+        }, 2000);
+      }
     });
   }
 
   chooseTour(e: any): void {
     const index = e.target.value;
-    console.log(index);
     if (Number(index) !== -1) {
       this.tour = this.tours[index];
     }
@@ -65,11 +79,12 @@ export class TourFormComponent {
 
   change(): void {
     this.changeTour = !this.changeTour;
+    this.tour = new Tour();
   }
 
   changeHotel(e: any): void {
     const index = e.target.value;
-    console.log(index);
+    console.log('change hotel');
     if (index !== -1) {
     this.tour.hotel = this.hotels[index];
     }
@@ -78,7 +93,7 @@ export class TourFormComponent {
 
   changeType(e: any): void {
     const index = e.target.value;
-    console.log(index);
+    console.log('change type');
     if (index !== -1) {
       this.tour.type = this.types[index];
     }

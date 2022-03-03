@@ -25,6 +25,8 @@
               class="btn btn-info">Добавить</button>
       <button (click)="setCountry()" *ngIf="changeCountry" [disabled]="!countryForm.form.valid"
               class="btn btn-info">Изменить</button>
+      <span *ngIf="!haveChange && buttonClicked" class="alert alert-danger">Изменения не сохранены, т.к страна осталась прежней</span>
+      <span *ngIf="haveChange && buttonClicked" class="alert alert-success">Изменения сохранены</span>
     </form>
   </div>
 </div>

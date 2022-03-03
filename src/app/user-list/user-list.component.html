@@ -14,7 +14,8 @@
         <td>{{ user.id }}</td>
         <td>{{ user.firstName + " " + user.lastName }}</td>
         <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
-        <span *ngFor="let tour of user.tours; let i = index">{{tour.hotel.name}}<span *ngIf="i != user.tours.length-1">, </span></span>
+        <span *ngFor="let tour of user.tours; let i = index">{{tour.hotel.name + "(" + tour.hotel.city.country.name + ")"}}
+          <span *ngIf="i != user.tours.length-1">, </span></span>
       </tr>
       </tbody>
     </table>

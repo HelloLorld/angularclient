@@ -15,9 +15,6 @@ export class PersonalAccountComponent implements OnInit {
   user: User;
   changedUser = false;
   unchanged = true;
-  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
-  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-  originally bred for hunting.`;
 
   constructor(private userService: UserService,
               private route: ActivatedRoute,
@@ -30,7 +27,6 @@ export class PersonalAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8));
     const decrString = CryptoES.AES.decrypt(localStorage.getItem('userId'), 'idForUser').toString(CryptoES.enc.Utf8);
     this.userService.getUserById(Number(decrString
       .slice(0, decrString.lastIndexOf('&')))).subscribe(data => this.user = data);
@@ -53,7 +49,6 @@ export class PersonalAccountComponent implements OnInit {
 
   saveUser(): void {
     this.userService.change(this.user).subscribe(data => {
-      console.log(data);
       if (data != null) { this.changedUser = true; }
       setTimeout(() => {
         location.reload();

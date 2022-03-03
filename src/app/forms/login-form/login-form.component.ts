@@ -13,6 +13,7 @@ export class LoginFormComponent {
   mail: string;
   loginInfo: Map<string, string>;
   getLogged: Map<string, number>;
+  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +29,6 @@ export class LoginFormComponent {
   onSubmit(): void {
     this.loginInfo.set('password', this.pass);
     this.loginInfo.set('email', this.mail);
-    console.log('pass1 ' + this.loginInfo.get('password') + '    email1:' + this.loginInfo.get('email'));
     this.userService.getUserByEmail(this.loginInfo).subscribe( data => {
       // @ts-ignore
       this.getLogged.set('email', data.email);
@@ -38,7 +38,6 @@ export class LoginFormComponent {
         localStorage.setItem('userId', CryptoES.AES.encrypt(data.userId.toString() + '&somebigstring', 'idForUser').toString());
         this.router.navigate(['/account']).then(r => location.reload());
       }
-      console.log(this.getLogged.size);
     });
   }
 

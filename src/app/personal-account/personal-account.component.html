@@ -17,5 +17,7 @@
     </mat-card>
   </div>
   <h2 class="card-title text-center">Доступные туры</h2>
-  <app-tour-list [user]="user" (addingTour)="handleTour($event)"></app-tour-list>
+  <div>
+    <app-tour-list [user]="user" (addingTour)="handleTour($event)"></app-tour-list>
+  </div>
 </div>

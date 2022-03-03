@@ -38,10 +38,12 @@
           <div *ngIf="!checkCity()" class="alert alert-danger">Укажите страну</div>
         </div>
       </div>
-      <button (click)="addHotel()" *ngIf="!changeHotel" [disabled]="!hotelForm.form.valid || checkCity()"
+      <button (click)="addHotel()" *ngIf="!changeHotel" [disabled]="!hotelForm.form.valid || !checkCity()"
               class="btn btn-info">Добавить</button>
-      <button (click)="setHotel()" *ngIf="changeHotel" [disabled]="!hotelForm.form.valid || checkCity()"
+      <button (click)="setHotel()" *ngIf="changeHotel" [disabled]="!hotelForm.form.valid || !checkCity()"
               class="btn btn-info">Изменить</button>
+      <span *ngIf="!haveChange && buttonClicked" class="alert alert-danger">Изменения не сохранены, т.к отель остался прежним</span>
+      <span *ngIf="haveChange && buttonClicked" class="alert alert-success">Изменения сохранены</span>
     </form>
   </div>
 </div>

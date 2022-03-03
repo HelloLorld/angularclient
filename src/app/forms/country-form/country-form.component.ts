@@ -13,6 +13,8 @@ export class CountryFormComponent {
   country: Country;
   countries: Country[];
   changeCountry: boolean;
+  haveChange: boolean;
+  buttonClicked = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,16 +37,30 @@ export class CountryFormComponent {
   }
 
   setCountry(): void {
-    this.countryService.change(this.country).subscribe(result => location.reload());
+    this.countryService.change(this.country).subscribe(result => {
+      this.buttonClicked = true;
+      if (result != null) {
+        this.haveChange = true;
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
+      }
+      else {
+        this.haveChange = false;
+        setTimeout(() => {
+          this.buttonClicked = false;
+        }, 2000);
+      }
+    });
   }
 
   change(): void {
     this.changeCountry = !this.changeCountry;
+    this.country = new Country();
   }
 
   chooseCountry(e: any): void {
     const index = e.target.value;
-    console.log(index);
     if (Number(index) !== -1) {
       this.country = this.countries[index];
     }

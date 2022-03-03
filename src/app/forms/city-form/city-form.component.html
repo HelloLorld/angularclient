@@ -42,6 +42,8 @@
               class="btn btn-info">Добавить</button>
       <button (click)="setChanges()" *ngIf="changeCity" [disabled]="!typeForm.form.valid || !checkCity()"
               class="btn btn-info">Изменить</button>
+      <span *ngIf="!haveChange && buttonClicked" class="alert alert-danger">Изменения не сохранены, т.к город остался прежним</span>
+      <span *ngIf="haveChange && buttonClicked" class="alert alert-success">Изменения сохранены</span>
     </form>
   </div>
 </div>

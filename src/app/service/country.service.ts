@@ -17,11 +17,11 @@ export class CountryService {
     return this.http.get<Country[]>(this.countryUrl);
   }
 
-  public save(country: Country) {
+  public save(country: Country): Observable<Country> {
     return this.http.post<Country>(this.countryUrl, country);
   }
 
-  public change(country: Country) {
-    return this.http.put<Country>(this.countryUrl + '/' + country.id, country);
+  public change(country: Country): Observable<Country> {
+    return this.http.patch<Country>(this.countryUrl + '/' + country.id, country);
   }
 }

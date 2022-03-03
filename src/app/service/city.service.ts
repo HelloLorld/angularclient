@@ -17,11 +17,11 @@ export class CityService {
     return this.http.get<City[]>(this.cityUrl);
   }
 
-  public save(city: City) {
+  public save(city: City): Observable<City> {
     return this.http.post<City>(this.cityUrl, city);
   }
 
-  public change(city: City) {
-    return this.http.put<City>(this.cityUrl + '/' + city.id, city);
+  public change(city: City): Observable<City> {
+    return this.http.patch<City>(this.cityUrl + '/' + city.id, city);
   }
 }

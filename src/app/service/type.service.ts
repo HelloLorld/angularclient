@@ -17,11 +17,11 @@ export class TypeService {
     return this.http.get<Type[]>(this.typeUrl);
   }
 
-  public save(type: Type) {
+  public save(type: Type): Observable<Type> {
     return this.http.post<Type>(this.typeUrl, type);
   }
 
-  public change(type: Type) {
-    return this.http.put<Type>(this.typeUrl + '/' + type.id, type);
+  public change(type: Type): Observable<Type> {
+    return this.http.patch<Type>(this.typeUrl + '/' + type.id, type);
   }
 }

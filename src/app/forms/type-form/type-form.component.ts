@@ -13,6 +13,8 @@ export class TypeFormComponent {
   type: Type;
   types: Type[];
   changeType: boolean;
+  haveChange: boolean;
+  buttonClicked = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,23 +32,36 @@ export class TypeFormComponent {
 
   addType(): void {
     this.typeService.save(this.type).subscribe(result => {
+      this.buttonClicked = true;
       location.reload();
     });
   }
 
   setType(): void {
     this.typeService.change(this.type).subscribe(result => {
-      location.reload();
+      this.buttonClicked = true;
+      if (result != null) {
+        this.haveChange = true;
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
+      }
+      else {
+        this.haveChange = false;
+        setTimeout(() => {
+          this.buttonClicked = false;
+        }, 2000);
+      }
     });
   }
 
   change(): void {
     this.changeType = !this.changeType;
+    this.type = new Type();
   }
 
   chooseType(e: any): void {
     const index = e.target.value;
-    console.log(index);
     if (Number(index) !== -1) {
       this.type = this.types[index];
     }
