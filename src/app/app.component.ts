@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import CryptoES from 'crypto-es';
+import {MatIconRegistry} from '@angular/material/icon';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +15,14 @@ export class AppComponent {
   adminLogged: boolean;
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer
   ) {
-    this.title = 'Турфирма';
+    this.title = 'Турфирма "Самолётик"';
+    iconRegistry.addSvgIcon(
+      'plane', sanitizer.bypassSecurityTrustResourceUrl('../assets/icons/icon-plane.svg')
+    );
     if (localStorage.getItem('userId') === null ) { this.userLogged = false; }
     else {
       this.userLogged = true;
@@ -26,6 +33,7 @@ export class AppComponent {
 
   exit(): void {
     localStorage.clear();
-    this.router.navigate(['']).then(r => location.reload());
+    this.userLogged = false;
+    this.adminLogged = false;
   }
 }

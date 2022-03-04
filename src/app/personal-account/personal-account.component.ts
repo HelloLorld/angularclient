@@ -68,8 +68,8 @@ export class PersonalAccountComponent implements OnInit {
         this.changedUser = false;
         setTimeout(() => {
           this.buttonClicked = false;
-          this.unchanged = true;
-        }, 1000);
+        }, 2000);
+        this.unchanged = true;
       }
     });
   }

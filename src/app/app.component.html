@@ -1,14 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="card bg-dark my-5">
+      <div class=" my-2">
         <div class="card-body">
-          <h2 class="card-title text-center text-white">{{ title }}</h2>
-          <ul *ngIf="userLogged" class="text-center list-inline py-3">
-            <li class="list-inline-item">
+          <ul class="text-center list-inline">
+            <li class="list-inline-item"><mat-icon svgIcon="plane" class="icon-display"></mat-icon></li>
+            <li class="list-inline-item"></li> <!--пустышка-->
+            <li class="list-inline-item"><h2 class="card-title text-center">{{ title }}</h2></li>
+            <li *ngIf="userLogged" class="list-inline-item">
               <a routerLink="/account" class="btn btn-info">Личный кабинет</a>
             </li>
-            <li class="list-inline-item">
+            <li *ngIf="userLogged" class="list-inline-item">
               <a routerLink="/tours" class="btn btn-info">Список туров</a>
             </li>
             <li *ngIf="adminLogged" class="list-inline-item">
@@ -22,7 +24,7 @@
                 <button mat-menu-item><a routerLink="/users" class="btn btn-info">Пользователи</a></button>
               </mat-menu>
             </li>
-            <li class="list-inline-item">
+            <li *ngIf="userLogged" class="list-inline-item">
               <a routerLink="/login" (click)="exit()" class="btn btn-info">Выйти</a>
             </li>
           </ul>
