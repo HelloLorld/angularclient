@@ -18,6 +18,7 @@ export class CityFormComponent {
   changeCity: boolean;
   haveChange: boolean;
   buttonClicked = false;
+  touchedCountry = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -79,6 +80,7 @@ export class CityFormComponent {
   }
 
   changeCountry(e: any): void {
+    this.touchedCountry = true;
     const index = e.target.value;
     if (Number(index) !== -1) {
       this.city.country = this.countries[index];

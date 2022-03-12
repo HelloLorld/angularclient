@@ -21,6 +21,8 @@ export class TourFormComponent {
   changeTour: boolean;
   haveChange: boolean;
   buttonClicked = false;
+  touchedHotel = false;
+  touchedType = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -83,6 +85,7 @@ export class TourFormComponent {
   }
 
   changeHotel(e: any): void {
+    this.touchedHotel = true;
     const index = e.target.value;
     console.log('change hotel');
     if (index !== -1) {
@@ -92,6 +95,7 @@ export class TourFormComponent {
   }
 
   changeType(e: any): void {
+    this.touchedType = true;
     const index = e.target.value;
     console.log('change type');
     if (index !== -1) {

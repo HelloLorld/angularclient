@@ -18,6 +18,7 @@ export class HotelFormComponent{
   changeHotel: boolean;
   haveChange: boolean;
   buttonClicked = false;
+  touchedCity = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -65,6 +66,7 @@ export class HotelFormComponent{
   }
 
   changeCity(e: any): void {
+    this.touchedCity = true;
     const index = e.target.value;
     if (Number(index) !== -1) {
       this.hotel.city = this.cities[index];

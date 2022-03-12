@@ -27,7 +27,7 @@
           <option [value]="-1">Не выбрано</option>
           <option *ngFor="let item of cities;let i = index" [value]="i">{{item.name + " (" + item.country.name + ")"}}</option>
         </select>
-        <div *ngIf="!checkCity()" class="alert alert-danger">Укажите страну</div>
+        <div *ngIf="!checkCity() && touchedCity" class="alert alert-danger">Укажите город</div>
       </div>
       <div class="form-group" *ngIf="changeHotel">
         <div *ngIf="hotel.city != null">
@@ -35,7 +35,7 @@
           <select (change)="changeCity($event)" id="country2" required>
             <option *ngFor="let item of cities;let i = index" [value]="i" [selected]="item.id === hotel.city.id">{{item.name}}</option>
           </select>
-          <div *ngIf="!checkCity()" class="alert alert-danger">Укажите страну</div>
+          <div *ngIf="!checkCity() && touchedCity" class="alert alert-danger">Укажите город</div>
         </div>
       </div>
       <button (click)="addHotel()" *ngIf="!changeHotel" [disabled]="!hotelForm.form.valid || !checkCity()"

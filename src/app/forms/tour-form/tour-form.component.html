@@ -30,7 +30,7 @@
           <option *ngFor="let item of hotels; let i = index;"
                   [value]="i">{{item.name + " (" + item.city.name + ")"}}</option>
         </select>
-        <div *ngIf="!checkHotel()" class="alert alert-danger">Укажите отель</div>
+        <div *ngIf="!checkHotel() && touchedHotel" class="alert alert-danger">Укажите отель</div>
       </div>
       <div class="form-group" *ngIf="changeTour">
         <div *ngIf="tour.hotel != null">
@@ -38,7 +38,7 @@
           <select (change)="changeHotel($event)" id="hotel2" required>
             <option *ngFor="let item of hotels;let i = index" [value]="i" [selected]="item.id === tour.hotel.id">{{item.name}}</option>
           </select>
-          <div *ngIf="!checkHotel()" class="alert alert-danger">Укажите отель</div>
+          <div *ngIf="!checkHotel() && touchedHotel" class="alert alert-danger">Укажите отель</div>
         </div>
       </div>
       <div class="form-group" *ngIf="!changeTour">
@@ -47,7 +47,7 @@
           <option [value]="-1">Не выбрано</option>
           <option *ngFor="let item of types;let i = index" [value]="i">{{item.type}}</option>
         </select>
-        <div *ngIf="!checkType()" class="alert alert-danger">Укажите тип</div>
+        <div *ngIf="!checkType() && touchedType" class="alert alert-danger">Укажите тип</div>
       </div>
       <div class="form-group" *ngIf="changeTour">
         <div *ngIf="tour.type != null">
@@ -55,7 +55,7 @@
           <select (change)="changeType($event)" id="type2" required>
             <option *ngFor="let item of types;let i = index" [value]="i" [selected]="item.id === tour.type.id">{{item.type}}</option>
           </select>
-          <div *ngIf="!checkType()" class="alert alert-danger">Укажите отель</div>
+          <div *ngIf="!checkType() && touchedType" class="alert alert-danger">Укажите отель</div>
         </div>
       </div>
       <button (click)="addTour()" *ngIf="!changeTour" [disabled]="!tourForm.form.valid || !checkTour()"
