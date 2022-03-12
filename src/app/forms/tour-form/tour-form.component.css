@@ -1,0 +1,14 @@
+select {
+  width: 100%;
+  font-size: 100%;
+  cursor: pointer;
+  border-radius: 0;
+  padding: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button {
+  margin: 5px;
+}
