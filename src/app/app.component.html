@@ -16,12 +16,12 @@
             <li *ngIf="adminLogged" class="list-inline-item">
               <button [matMenuTriggerFor]="menu" class="btn btn-info">Меню администратора</button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item><a routerLink="/addtour" class="btn btn-info">Добавить тур</a></button>
-                <button mat-menu-item><a routerLink="/addcity" class="btn btn-info">Добавить город</a></button>
-                <button mat-menu-item><a routerLink="/addcountry" class="btn btn-info">Добавить страну</a></button>
-                <button mat-menu-item><a routerLink="/addhotel" class="btn btn-info">Добавить отель</a></button>
-                <button mat-menu-item><a routerLink="/addtype" class="btn btn-info">Добавить тип</a></button>
-                <button mat-menu-item><a routerLink="/users" class="btn btn-info">Пользователи</a></button>
+                <button mat-menu-item><a routerLink="/addtour" class="btn btn-info menu-button">Добавить тур</a></button>
+                <button mat-menu-item><a routerLink="/addcity" class="btn btn-info menu-button">Добавить город</a></button>
+                <button mat-menu-item><a routerLink="/addcountry" class="btn btn-info menu-button">Добавить страну</a></button>
+                <button mat-menu-item><a routerLink="/addhotel" class="btn btn-info menu-button">Добавить отель</a></button>
+                <button mat-menu-item><a routerLink="/addtype" class="btn btn-info menu-button">Добавить тип тура</a></button>
+                <button mat-menu-item><a routerLink="/users" class="btn btn-info menu-button">Пользователи</a></button>
               </mat-menu>
             </li>
             <li *ngIf="userLogged" class="list-inline-item">
